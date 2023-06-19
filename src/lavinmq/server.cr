@@ -339,12 +339,12 @@ module LavinMQ
       cgroup ||= "/"
       # cgroup v2
       begin
-        return File.read("/sys/fs/cgroup#{cgroup}/memory.max").to_i64?
+        return File.read("/sys/fs/memory/cgroup#{cgroup}/memory.max").to_i64?
       rescue File::NotFoundError
       end
       # cgroup v1
       {
-        "/sys/fs/cgroup#{cgroup}/memory.limit_in_bytes",
+        "/sys/fs/cgroup/memory/#{cgroup}/memory.limit_in_bytes",
         "/sys/fs/cgroup/memory/memory.limit_in_bytes",
       }.each do |path|
         l = File.read(path)
